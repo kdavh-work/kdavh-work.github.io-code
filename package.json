@@ -2,6 +2,7 @@
   "name": "kdavh-work.github.io",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kdavh-work.github.io",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.1",
@@ -10,6 +11,7 @@
     "@types/node": "^12.19.6",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
+    "gh-pages": "^3.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
@@ -17,6 +19,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b main -d build --remote prod",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
