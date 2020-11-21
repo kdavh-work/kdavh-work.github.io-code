@@ -34,7 +34,7 @@ export const Blocks = () => {
             fillStyle: "blue",
         },
         })
-        const ball = Bodies.circle(150, 0, 10, {
+        const ball = Bodies.circle(boxWidth / 2, 0, 10, {
         restitution: 0.9,
         render: {
             fillStyle: "yellow",
