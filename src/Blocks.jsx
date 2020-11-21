@@ -1,6 +1,15 @@
 import React, { useEffect, useRef } from "react"
 import {Bodies, Composites, Engine, Mouse, MouseConstraint, Render, World} from "matter-js"
 
+const blockWidth = 80
+const blockHeight = 80
+const stackColumns = 6
+const stackRows = 4
+const stackWidth = stackColumns * blockWidth
+const stackHeight = stackRows * blockHeight
+
+const floorThickness = 50
+
 export const Blocks = () => {
     const boxRef = useRef(null)
     const canvasRef = useRef(null)
@@ -12,6 +21,10 @@ export const Blocks = () => {
 
         const boxWidth = boxRef.current.offsetWidth
         const boxHeight = boxRef.current.offsetHeight
+        const boxCenter = boxWidth / 2
+        const stackLeft = boxCenter - stackWidth / 2
+        const floorVerticalCenter = boxHeight - 40
+        const stackTop = floorVerticalCenter - stackHeight - 100
 
         const engine = Engine.create(),
             world = engine.world
@@ -22,23 +35,19 @@ export const Blocks = () => {
             options: {
                 width: boxWidth,
                 height: boxHeight,
-                // background: "rgba(255, 0, 0, 0.5)",
-                // wireframes: false,
+                background: "rgba(255, 0, 0, 0.5)",
+                wireframes: false,
             },
         })
 
         // add bodies
-        const stack = Composites.stack(200, 380, 10, 5, 0, 0, function(x, y) {
-            return Bodies.rectangle(x, y, 40, 40);
+        const stack = Composites.stack(stackLeft, stackTop, stackColumns, stackRows, 0, 0, (x, y) => {
+            return Bodies.rectangle(x, y, blockWidth, blockHeight);
         });
 
         World.add(world, stack);
         World.add(world, [
-            // walls
-            Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
-            Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
-            Bodies.rectangle(0, 300, 50, 600, { isStatic: true }),
-            Bodies.rectangle(400, 606, 800, 50.5, { isStatic: true })
+            Bodies.rectangle(boxCenter, floorVerticalCenter, boxWidth, floorThickness, { isStatic: true })
         ]);
 
 
