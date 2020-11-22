@@ -8,6 +8,9 @@ const stackRows = 4
 const stackWidth = stackColumns * blockWidth
 const stackHeight = stackRows * blockHeight
 
+const wallThickness = 100
+// so high that when blocks are flung really high, they still can't escape over side wall
+const wallHeight = 10_000
 const floorThickness = 50
 
 export const Blocks = () => {
@@ -47,7 +50,9 @@ export const Blocks = () => {
 
         World.add(world, stack);
         World.add(world, [
-            Bodies.rectangle(boxCenter, floorVerticalCenter, boxWidth, floorThickness, { isStatic: true })
+            Bodies.rectangle(boxCenter, floorVerticalCenter, boxWidth, floorThickness, { isStatic: true }),
+            Bodies.rectangle(-wallThickness / 2, boxHeight / 2, wallThickness, wallHeight, { isStatic: true }),
+            Bodies.rectangle(boxWidth + wallThickness / 2, boxHeight / 2, wallThickness, wallHeight, { isStatic: true })
         ]);
 
 
