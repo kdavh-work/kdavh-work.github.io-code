@@ -32,13 +32,14 @@ async function setupChannel(chatChannel: Channel): Promise<any> {
     + '<span class="me">' + user + '</span>.', true);
   }
 
+  let removeMessageTimeout: any;
   // Listen for new messages sent to the channel
   chatChannel.on('messageAdded', function(message) {
-    console.log('New message, yay!!');
-    console.log(message.author, message.body);
     const commentElement = document.querySelector('#comment-space')
     if (commentElement) {
-      commentElement.innerHTML = `<div>${message.body}</div>`;
+      commentElement.innerHTML = `<div class='comment-space-text'>${message.body}</div>`;
+      clearTimeout(removeMessageTimeout);
+      removeMessageTimeout = setTimeout(() => commentElement.innerHTML = '', 3000);
     }
   });
 }
