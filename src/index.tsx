@@ -8,8 +8,8 @@ import { user } from './user';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const serverHost = 'https://kdavh-github-io-prod-9942.twil.io'
-const chatChannelName = 'general'
+const serverHost = 'https://kdavh-github-io-prod-9942.twil.io';
+const chatChannelPrefix = 'general-';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -45,10 +45,19 @@ async function setupChannel(chatChannel: Channel): Promise<any> {
 }
 
 function createOrJoinChatChannel(chatClient: Client): Promise<any> {
+  let chatChannelName: string = '';
+  const idPromise = new Promise((resolve) => {
+    window.analytics.ready(() => {
+      chatChannelName = chatChannelPrefix + window.analytics.user().anonymousId();
+      console.log(`chat channel name determined: ${chatChannelName}`)
+      resolve();
+    });
+  });
   // Get the general chat channel, which is where all the messages are
   // sent in this simple application
   // print('Attempting to join "general" chat channel...');
-  return chatClient.getChannelByUniqueName(chatChannelName)
+  return idPromise
+  .then(() => chatClient.getChannelByUniqueName(chatChannelName))
   .then(function(channel) {
     chatChannel = channel;
     console.log('Found general channel:');
