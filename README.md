@@ -14,6 +14,13 @@ List messages in the general channel
 Post a test message in the general channel
 `curl -XPOST https://chat.twilio.com/v2/Services/IS2480e232ff704626b42d590ebf23e771/Channels/general/Messages -u "SKa5c34985affae1f12ceaa897f3836275:${TWILIO_API_SECRET}" -d 'Body=test' | jq`
 
+## The infrastructure:
+
+Twilio function for token endpoint for local chat client:
+`https://www.twilio.com/console/functions/editor/ZSd860117e02a40a6eccdaa5b7e0aa2ce4/environment/ZE69304f806e223510ecb513315ea395cc/config/variables`
+
+Segment function for processing events and sending chat messages:
+`https://app.segment.com/twilio-khart/functions/catalog/dfn_5fc9e0044832c150fcfd40c8/edit/code`
 
 ## Deploy it to github pages
 
