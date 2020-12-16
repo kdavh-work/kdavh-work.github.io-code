@@ -23,7 +23,6 @@ let chatChannel: Channel;
 
 // Set up channel after it has been found
 async function setupChannel(chatChannel: Channel): Promise<any> {
-  let joinPromise = Promise.resolve();
   try {
     await chatChannel.getMemberByIdentity(user);
   } catch (e) {

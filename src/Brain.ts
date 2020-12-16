@@ -42,10 +42,10 @@ export default class Brain {
             return null
         }
         const mostRecentData = state[state.length - 1]
-        const previousData = state[state.length - 2]
+        // const previousData = state[state.length - 2]
         const firstData = state[0]
         const secondData = state[1]
-        const change = this.calcChange(mostRecentData, previousData)
+        // const change = this.calcChange(mostRecentData, previousData)
         const avgSpeed = this.calcChange(mostRecentData, firstData).speed / state.length
         const totalMovementY = firstData.yPos - mostRecentData.yPos
         const firstMovementY = firstData.yPos - secondData.yPos
