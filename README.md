@@ -15,6 +15,10 @@ Post a test message in the general channel
 `curl -XPOST https://chat.twilio.com/v2/Services/IS2480e232ff704626b42d590ebf23e771/Channels/general/Messages -u "SKa5c34985affae1f12ceaa897f3836275:${TWILIO_API_SECRET}" -d 'Body=test' | jq`
 
 
+## Deploy it to github pages
+
+`npm run deploy`
+
 
 ## Available Scripts
 
