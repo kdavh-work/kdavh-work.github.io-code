@@ -4,6 +4,7 @@ import './Blocks';
 import { Blocks } from './Blocks';
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">

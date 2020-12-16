@@ -25,3 +25,15 @@
   width: 100%;
   min-height: 60px;
 }
+
+.App-comment-space {
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+  padding: 10px;
+  top: 60px;
+  right: 10px;
+  height: 100px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.1)
+}
