@@ -10,6 +10,7 @@ declare global {
 
 const measureDelay = 500
 const maxMeasurements = 9
+const maxDroppedMeasurements = 9
 
 export type Data = {
     xPos: number
@@ -55,7 +56,8 @@ export default class Tracker {
                 console.log('Tracked:')
                 console.table(event)
             }
-            if (this.droppedState.length > maxMeasurements || this.shouldStopTracking(event)) {
+            // TODO: differentiate tracking interval, stacked should keep tracking but not send events all the time.  Otherwise can't track stacked then fallen event
+            if (this.droppedState.length > maxDroppedMeasurements || this.shouldStopTracking(event)) {
                 window.clearInterval(this.trackDropped)
             }
         }, 1000)

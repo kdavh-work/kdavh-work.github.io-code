@@ -53,9 +53,9 @@ export default class Brain {
         console.log('Analyzing dropped state', state)
         console.log(avgSpeed)
         console.log(totalMovementY)
-        console.log(!(state.length % 3))
+        console.log(firstMovementY)
 
-        if (firstMovementY < -80) {
+        if (firstMovementY < -100) {
             console.log('User has simply dropped something.')
             return {
                 type: 'JustDropped',
