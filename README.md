@@ -2,6 +2,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Stack blocks and see commentary
+
+As you stack blocks, events will be sent to Segment.  At the same time your browser is listening to a Twilio chat channel. Segment will ingest the event, decide if it's worth commenting on, and if so, send a comment to the Twilio chat channel.
+
+## Sample helpful curls
+
+List messages in the general channel
+`curl https://chat.twilio.com/v2/Services/IS2480e232ff704626b42d590ebf23e771/Channels/general/Messages -u "SKa5c34985affae1f12ceaa897f3836275:${TWILIO_API_SECRET}" | jq`
+
+Post a test message in the general channel
+`curl -XPOST https://chat.twilio.com/v2/Services/IS2480e232ff704626b42d590ebf23e771/Channels/general/Messages -u "SKa5c34985affae1f12ceaa897f3836275:${TWILIO_API_SECRET}" -d 'Body=test' | jq`
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:

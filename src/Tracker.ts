@@ -1,6 +1,6 @@
 import {Body, Composite} from 'matter-js'
 
-import Brain from './Brain'
+import Brain, { BrainEvent } from './Brain'
 
 type IntervalId = number | undefined
 
@@ -9,7 +9,7 @@ declare global {
 }
 
 const measureDelay = 500
-const maxMeasurements = 15
+const maxMeasurements = 9
 
 export type Data = {
     xPos: number
@@ -34,7 +34,8 @@ export default class Tracker {
                 console.log('Tracked:')
                 console.table(event)
             }
-            if (this.draggingState.length > maxMeasurements) {
+            // don't keep tracking once something falls
+            if (this.draggingState.length > maxMeasurements || this.shouldStopTracking(event)) {
                 window.clearInterval(this.trackDragging)
             }
         }, measureDelay)
@@ -51,8 +52,10 @@ export default class Tracker {
             const event = Brain.findDroppedSignificance(this.droppedState)
             if (event) {
                 window.analytics.track(event.type, event.parameters)
+                console.log('Tracked:')
+                console.table(event)
             }
-            if (this.droppedState.length > maxMeasurements) {
+            if (this.droppedState.length > maxMeasurements || this.shouldStopTracking(event)) {
                 window.clearInterval(this.trackDropped)
             }
         }, 1000)
@@ -63,5 +66,10 @@ export default class Tracker {
             xPos: body.position.x,
             yPos: body.position.y,
         }
+    }
+
+    private static shouldStopTracking(event: BrainEvent | null) {
+        console.log(event?.type)
+        return event?.type === 'Falling' || event?.type === 'JustDropped'
     }
 }

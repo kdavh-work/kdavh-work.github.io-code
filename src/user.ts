@@ -28,6 +28,7 @@ if (!blockstackUser) {
   window.localStorage.setItem('blockstackUser', blockstackUser);
 }
 
+console.log('Segment Identify: ' + blockstackUser);
 (window as any).analytics.identify(blockstackUser);
 
 export const user = blockstackUser;

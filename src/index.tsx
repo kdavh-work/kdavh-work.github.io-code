@@ -93,8 +93,7 @@ fetch(`${serverHost}/token?blockchatUser=${user}`)
       console.log('Created chat client');
       chatClient = client;
       chatClient.getSubscribedChannels()
-        .then(() => createOrJoinChatChannel(chatClient))
-        .then(() => chatChannel.sendMessage('Test message!!'));
+        .then(() => createOrJoinChatChannel(chatClient));
 
       // when the access token is about to expire, refresh it
       chatClient.on('tokenAboutToExpire', function() {
